@@ -3,7 +3,6 @@ public class Main {
         Maze maze = new Maze();
 
         System.out.println(maze);
-        System.out.println("test");
     }
 }
 

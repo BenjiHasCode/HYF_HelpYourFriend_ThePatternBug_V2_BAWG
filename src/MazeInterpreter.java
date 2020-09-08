@@ -45,19 +45,13 @@ public class MazeInterpreter {
 
                 }
             }
-            System.out.println(Arrays.deepToString(points));
-            System.out.println(points[0].length);
-            System.out.println(points.length);
-
-            System.out.println(vertical.length);
-            System.out.println(vertical[0].length);
             //set vertical lines
-            /*for(int i = 0; i < points.length; i++){
-                for(int j = 0; j < points[0].length; j++){
+            for(int i = 0; i < vertical.length; i++){//TODO Why does this work?
+                for(int j = 0; j < vertical[i].length; j++){
                     if(vertical[i][j] == 1)
                         points[j][i].hasVertical = true;
                 }
-            }*/
+            }
 
             return points;
         }catch(FileNotFoundException e){

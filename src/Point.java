@@ -15,11 +15,12 @@ public class Point {
 
     public String toString(){
         if (!hasHorizontal && !hasVertical)
-            return " ";
+            return "  ";
         else if(hasHorizontal && hasVertical)
             return "|_";
         else if (hasVertical)
-            return "|";
-        else return "_";
+            return "| ";
+        else
+            return "__";
     }
 }
