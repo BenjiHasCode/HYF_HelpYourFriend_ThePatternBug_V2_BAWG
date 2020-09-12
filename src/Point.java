@@ -7,20 +7,19 @@ public class Point {
         hasVertical = false;
     }
 
-    public Point(boolean hasHorizontal, boolean hasVertical){
+    /*public Point(boolean hasHorizontal, boolean hasVertical){
         this.hasHorizontal = hasHorizontal;
         this.hasVertical = hasVertical;
-    }
-
+    }*/
 
     public String toString(){
         if (!hasHorizontal && !hasVertical)
-            return "  ";
+            return "   ";
         else if(hasHorizontal && hasVertical)
-            return "|_";
+            return "|__";
         else if (hasVertical)
-            return "| ";
+            return "|  ";
         else
-            return "__";
+            return "___";
     }
 }

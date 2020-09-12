@@ -1,8 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
-
+//pure fabrication
 public class MazeInterpreter {
     public static Point[][] textToMaze(){
         try{
@@ -13,7 +12,6 @@ public class MazeInterpreter {
             for(int i = 0; i < rows; i++){
                 int[] temp = stringToIntArray(input.nextLine().split(", "));
                 System.arraycopy(temp, 1, horizontal[i] = new int[temp.length-1], 0, temp.length - 1);
-                //                horizontal[i] = stringToIntArray(input.nextLine().split(", "));
             }
 
             //we scan vertical
@@ -22,11 +20,7 @@ public class MazeInterpreter {
             for(int i = 0; i < rows; i++){
                 int[] temp = stringToIntArray(input.nextLine().split(", "));
                 System.arraycopy(temp, 1, vertical[i] = new  int[temp.length-1], 0, temp.length - 1);
-//                vertical[i] = stringToIntArray(input.nextLine().split(", "));
             }
-            //TODO
-            System.out.println(Arrays.deepToString(horizontal));
-            System.out.println(Arrays.deepToString(vertical));
 
             //new point array
             Point[][] points = new Point[horizontal.length][vertical.length];
@@ -46,7 +40,7 @@ public class MazeInterpreter {
                 }
             }
             //set vertical lines
-            for(int i = 0; i < vertical.length; i++){//TODO Why does this work?
+            for(int i = 0; i < vertical.length; i++){
                 for(int j = 0; j < vertical[i].length; j++){
                     if(vertical[i][j] == 1)
                         points[j][i].hasVertical = true;
@@ -67,5 +61,24 @@ public class MazeInterpreter {
             intArray[i] = Integer.parseInt(textArray[i]);
         }
         return intArray;
+    }
+
+    public static Bug findEntrance(Maze maze){
+        for(int x = 0; x < maze.points[0].length; x++){
+            if(!maze.points[0][x].hasHorizontal){
+                return new Bug (0, x);
+            }
+        }
+        return null;
+    }
+
+    public static Bug findExit(Maze maze){
+        for (int i = maze.points.length - 1; i >= 0; i--){
+            for (int j = 0; j < maze.points[0].length; j++) {
+                if (!maze.points[i][j].hasHorizontal)
+                    return new Bug(i, j);
+            }
+        }
+        return null;
     }
 }
