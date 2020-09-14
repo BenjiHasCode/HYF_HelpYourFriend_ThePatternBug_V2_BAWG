@@ -1,10 +1,11 @@
+/**
+ * @author Benjamin Andre Wede Gustavsen
+ * @since 14-09-2020
+ * @version 1.0
+ */
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Game.start();
-        //TODO
-            //REFACTORERING
-                //PATTERNS
-            //COORDINATE CLASS --> INHERITANCE IN BUG CLASS (MOVEMENT IN BUG CLASS?)
     }
 }
 

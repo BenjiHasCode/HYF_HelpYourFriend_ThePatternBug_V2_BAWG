@@ -1,3 +1,6 @@
+/**Contains booleans to determine if they have a horizontal and/or vertical line
+ * Vertical lines are assumed to be on the left side of the point
+ */
 public class Point {
     boolean hasHorizontal;
     boolean hasVertical;
@@ -6,11 +9,6 @@ public class Point {
         hasHorizontal = false;
         hasVertical = false;
     }
-
-    /*public Point(boolean hasHorizontal, boolean hasVertical){
-        this.hasHorizontal = hasHorizontal;
-        this.hasVertical = hasVertical;
-    }*/
 
     public String toString(){
         if (!hasHorizontal && !hasVertical)

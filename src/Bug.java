@@ -1,37 +1,22 @@
 import java.util.Stack;
 
-public class Bug {
-    private int x;
-    private int y;
-    private Stack<Bug> route;
+/**
+ * An object of this class contains coordinates, and a stack that represents the route that the bug takes.
+ */
+public class Bug extends Coordinate {
+    private Stack<Coordinate> route;
 
     public Bug(int x, int y){
-        this.x = x;
-        this.y = y;
+        super(x, y);
         route = new Stack<>();
+        route.add(new Coordinate(x,y)); //adds our current position to route (start point)
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public Stack<Bug> getRoute() {
+    public Stack<Coordinate> getRoute() {
         return route;
     }
 
-    public void setRoute(Stack<Bug> route) {
+    public void setRoute(Stack<Coordinate> route) {
         this.route = route;
     }
 }

@@ -1,16 +1,24 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-//pure fabrication
+/**
+ * This Class is Pure fabrication. A class was needed to interpret data and convert it into usable data for our maze.
+ * The class can make a maze based on the data format that ASBC provided, and can find entrance/exit to said maze.
+ */
 public class MazeInterpreter {
+    /**
+     * reads data and converts horizontal and vertical data to data usable by maze object.
+     * @return A two-dimensional array of Points representing a maze.
+     */
     public static Point[][] textToMaze(){
         try{
             Scanner input = new Scanner(new File("maze.txt"));
-            //we scan horizontal
             int rows = Integer.parseInt(input.nextLine());
             int[][] horizontal = new int[rows][];
+            //we scan the horizontal lines and add them to our array
             for(int i = 0; i < rows; i++){
-                int[] temp = stringToIntArray(input.nextLine().split(", "));
+                int[] temp = StringToIntArray.convert(input.nextLine().split(", "));
+                //first place contains row number, thus we start copying from index 1
                 System.arraycopy(temp, 1, horizontal[i] = new int[temp.length-1], 0, temp.length - 1);
             }
 
@@ -18,25 +26,23 @@ public class MazeInterpreter {
             rows = Integer.parseInt(input.nextLine());
             int[][] vertical = new int[rows][];
             for(int i = 0; i < rows; i++){
-                int[] temp = stringToIntArray(input.nextLine().split(", "));
+                int[] temp = StringToIntArray.convert(input.nextLine().split(", "));
                 System.arraycopy(temp, 1, vertical[i] = new  int[temp.length-1], 0, temp.length - 1);
             }
 
             //new point array
             Point[][] points = new Point[horizontal.length][vertical.length];
-
+            //initialize all points
             for(int i = 0; i < points.length; i++){
                 for(int j = 0; j < points[0].length; j++){
                     points[i][j] = new Point();
                 }
             }
-
             //set horizontal lines
             for(int i = 0; i < horizontal.length; i++){
                 for(int j = 0; j < horizontal[i].length; j++){
                     if(horizontal[i][j] == 1)
                         points[i][j].hasHorizontal = true;
-
                 }
             }
             //set vertical lines
@@ -46,37 +52,37 @@ public class MazeInterpreter {
                         points[j][i].hasVertical = true;
                 }
             }
-
             return points;
         }catch(FileNotFoundException e){
-            System.out.println(e);
+            System.out.println("File Not Found!");
             return null;
         }
-
     }
 
-    public static int[] stringToIntArray(String[] textArray){
-        int[] intArray = new int[textArray.length];
-        for(int i = 0; i < textArray.length; i++){
-            intArray[i] = Integer.parseInt(textArray[i]);
-        }
-        return intArray;
-    }
-
-    public static Bug findEntrance(Maze maze){
-        for(int x = 0; x < maze.points[0].length; x++){
-            if(!maze.points[0][x].hasHorizontal){
-                return new Bug (0, x);
+    /**
+     * Finds the entrance to our maze
+     * @return bug containing the position of entrance.
+     */
+    public static Bug findEntrance(){
+        Maze maze = Maze.getInstance();
+        for(int y = 0; y < maze.points[0].length; y++){
+            if(!maze.points[0][y].hasHorizontal){
+                return new Bug (0, y);
             }
         }
         return null;
     }
 
-    public static Bug findExit(Maze maze){
+    /**
+     * Finds exit to maze (assuming the exit to be on the top of the maze)
+     * @return Coordinate object containing the exits coordinates.
+     */
+    public static Coordinate findExit(){
+        Maze maze = Maze.getInstance();
         for (int i = maze.points.length - 1; i >= 0; i--){
             for (int j = 0; j < maze.points[0].length; j++) {
                 if (!maze.points[i][j].hasHorizontal)
-                    return new Bug(i, j);
+                    return new Coordinate(i, j);
             }
         }
         return null;

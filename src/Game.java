@@ -1,32 +1,29 @@
-import java.time.Duration;
-import java.time.Instant;
-
 public class Game {
+    /**
+     * This methods starts the "game". It initializes all that is necessary and calculates results when the "game" is done.
+     */
     public static void start() {
-        int steps = 1; //TODO VAR SAT TIL 0, MEN VAR EN UNDER HVAD DEN BURDE. CHECK UP!
-        long time;
+        //note: bug starts in entrance square meaning it doesn't need to already enter maze
+        //because of this, steps will always be - 1, than if it had to enter it.
+        //that said, one could make it enter
+        int steps = 0;
 
-        Maze maze = new Maze();
-        Bug bug = MazeInterpreter.findEntrance(maze);
-        bug.getRoute().add(new Bug(bug.getX(), bug.getY()));
-        Bug goal = MazeInterpreter.findExit(maze);
+        Maze maze = Maze.getInstance();
+        Bug bug = MazeInterpreter.findEntrance();
+        Coordinate goal = MazeInterpreter.findExit();
 
+        //Draw maze
         System.out.println(maze.printMaze(bug));
-        time = System.currentTimeMillis();
+        //start timer
+        long timeStart = System.currentTimeMillis();
 
-        boolean flag = true;
-
-        while(flag){
-            Movement.move(bug, maze);
-            steps++; //TODO Step virker til at være en mindre end den burde! D:
+        while(!(bug.getY() == goal.getY() && bug.getX() == goal.getX())){
+            Movement.move(bug);
+            steps++;
             System.out.println(maze.printMaze(bug));
-
-            if ((bug.getY() == goal.getY() && bug.getX() == goal.getX())){
-                flag = false;
-            }
         }
-        long timeEnd = System.currentTimeMillis();
 
-        System.out.println("It took: " + steps + " steps, and: " + (timeEnd - time) + " milliseconds");
+        long timeEnd = System.currentTimeMillis();
+        System.out.println("It took: " + steps + " steps, and: " + (timeEnd - timeStart) + " milliseconds");
     }
 }
