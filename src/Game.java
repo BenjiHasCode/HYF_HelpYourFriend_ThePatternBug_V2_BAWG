@@ -24,7 +24,6 @@ public class Game {
             if ((bug.getY() == goal.getY() && bug.getX() == goal.getX())){
                 flag = false;
             }
-           // Thread.sleep(1000);
         }
         long timeEnd = System.currentTimeMillis();
 
