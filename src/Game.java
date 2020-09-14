@@ -2,8 +2,8 @@ import java.time.Duration;
 import java.time.Instant;
 
 public class Game {
-    public static void start() throws InterruptedException {
-        int steps = 0;
+    public static void start() {
+        int steps = 1; //TODO VAR SAT TIL 0, MEN VAR EN UNDER HVAD DEN BURDE. CHECK UP!
         long time;
 
         Maze maze = new Maze();
@@ -18,7 +18,7 @@ public class Game {
 
         while(flag){
             Movement.move(bug, maze);
-            steps++;
+            steps++; //TODO Step virker til at være en mindre end den burde! D:
             System.out.println(maze.printMaze(bug));
 
             if ((bug.getY() == goal.getY() && bug.getX() == goal.getX())){
